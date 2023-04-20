@@ -66,7 +66,7 @@ class WelcomeViewBody extends StatelessWidget {
                     ),
                     ResponsiveCustomButton(
                       width: 120,
-                      onTap: () => cubit.navigateDirectlyToMainView(context),
+                      onTap: () => cubit.navigateDirectlyToLayout(context),
                     ),
                   ],
                 ),
