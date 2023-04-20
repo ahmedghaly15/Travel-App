@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/colors.dart';
-import '../../../welcome_view/components/description_text.dart';
+import '../../../../shared/components/description_text.dart';
 
 class ExploreMoreListView extends StatelessWidget {
   final Map<String, String> images = const {

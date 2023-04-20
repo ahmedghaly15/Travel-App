@@ -8,3 +8,7 @@ void navigateAndFinish(context, {required Widget view}) {
     (Route<dynamic> route) => false, // remove all previous routes
   );
 }
+
+void navigateBack(context) {
+  Navigator.pop(context);
+}

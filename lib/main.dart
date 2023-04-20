@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_app/views/welcome_view/welcome_view.dart';
+import 'package:travel_app/views/detail_view/detail_view.dart';
 
 import 'layout/cubit/cubit.dart';
 
@@ -19,7 +19,7 @@ class TravelApp extends StatelessWidget {
           fontFamily: 'Lato',
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: const WelcomeView(),
+        home: const DetailView(),
       ),
     );
   }

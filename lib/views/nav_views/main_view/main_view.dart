@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/views/nav_views/main_view/components/tab_bar_content.dart';
-import 'package:travel_app/views/welcome_view/components/description_text.dart';
-import 'package:travel_app/views/welcome_view/components/title_text.dart';
 
 import '../../../shared/colors.dart';
+import '../../../shared/components/description_text.dart';
+import '../../../shared/components/title_text.dart';
 import 'components/explore_more_list_view.dart';
 import 'components/tab_bar_tabs.dart';
 
