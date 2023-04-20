@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/constants/colors.dart';
+import '../../../shared/colors.dart';
 
 class ResponsiveCustomButton extends StatelessWidget {
   final bool? isResponsive;
