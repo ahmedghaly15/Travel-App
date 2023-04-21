@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_app/layout/cubit/states.dart';
+import 'package:travel_app/models/data_model.dart';
+import 'package:travel_app/services/data_services.dart';
 import 'package:travel_app/views/nav_views/bar_item_view.dart';
 import 'package:travel_app/views/nav_views/main_view/main_view.dart';
 import 'package:travel_app/views/nav_views/profile_view.dart';
 import 'package:travel_app/views/nav_views/search_view.dart';
 
 class TravelAppCubit extends Cubit<TravelAppStates> {
-  TravelAppCubit() : super(TravelAppInitialState());
+  TravelAppCubit({required this.data}) : super(TravelAppInitialState());
 
   static TravelAppCubit getObject(context) => BlocProvider.of(context);
 
@@ -28,7 +30,7 @@ class TravelAppCubit extends Cubit<TravelAppStates> {
     ),
     const BottomNavigationBarItem(
       label: "Second tab",
-      icon: Icon(Icons.bar_chart_sharp),
+      icon: Icon(Icons.favorite),
       backgroundColor: Colors.white,
     ),
     const BottomNavigationBarItem(
@@ -46,5 +48,18 @@ class TravelAppCubit extends Cubit<TravelAppStates> {
   void changeBottomNavIndex(int index) {
     currentIndex = index;
     emit(ChangeBottomNavIndexState());
+  }
+
+  final DataServices data;
+  late final List<DataModel> places;
+  void getData() {
+    emit(GetDataLoadingState());
+    data.getInfo().then((value) {
+      places = value;
+      emit(GetDataSuccesState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(GetDataErrorState(error: error.toString()));
+    });
   }
 }

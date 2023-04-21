@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_app/layout/cubit/cubit.dart';
@@ -15,7 +16,15 @@ class TravelLayout extends StatelessWidget {
       builder: (context, state) {
         TravelAppCubit cubit = TravelAppCubit.getObject(context);
         return Scaffold(
-          body: cubit.views[cubit.currentIndex],
+          body: ConditionalBuilder(
+            condition: state is! GetDataLoadingState,
+            builder: (context) => cubit.views[cubit.currentIndex],
+            fallback: (context) => const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.mainColor,
+              ),
+            ),
+          ),
           bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
             notchMargin: 0.1,

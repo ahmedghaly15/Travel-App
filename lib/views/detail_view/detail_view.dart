@@ -1,62 +1,73 @@
 import 'package:flutter/material.dart';
-import '../../shared/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_app/models/data_model.dart';
+import 'package:travel_app/shared/constants.dart';
+import 'package:travel_app/views/detail_view/cubit/cubit.dart';
+import 'package:travel_app/views/detail_view/cubit/states.dart';
 import 'components/details.dart';
 import 'components/fav_and_book_buttons.dart';
 
-class DetailView extends StatefulWidget {
-  const DetailView({super.key});
+class DetailView extends StatelessWidget {
+  final DataModel details;
+  const DetailView({super.key, required this.details});
 
-  @override
-  State<DetailView> createState() => _DetailViewState();
-}
-
-class _DetailViewState extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SizedBox(
-        height: double.maxFinite,
-        width: double.maxFinite,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              child: Container(
-                height: 350,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    'assets/images/mountain.jpeg',
+    return BlocProvider(
+      create: (context) => DetailViewCubit(),
+      child: BlocBuilder<DetailViewCubit, DetailViewStates>(
+          builder: (context, state) {
+        DetailViewCubit cubit = DetailViewCubit.getObject(context);
+        return Scaffold(
+          body: SizedBox(
+            height: double.maxFinite,
+            width: double.maxFinite,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  child: Container(
+                    height: 350,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                          "http://mark.bslmeiyu.com/uploads/${details.img}",
+                        ),
+                      ),
+                    ),
                   ),
-                )),
-              ),
-            ),
-            Positioned(
-              left: 20,
-              top: 70,
-              child: IconButton(
-                onPressed: () => navigateBack,
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                  size: 25,
                 ),
-              ),
+                Positioned(
+                  left: 20,
+                  top: 70,
+                  child: IconButton(
+                    onPressed: () => navigateBack(context),
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 320,
+                  child: Details(
+                    details: details,
+                    cubit: cubit,
+                  ),
+                ),
+                const Positioned(
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  child: FavAndBookButtons(),
+                ),
+              ],
             ),
-            const Positioned(
-              top: 320,
-              child: Details(),
-            ),
-            const Positioned(
-              bottom: 20,
-              left: 20,
-              right: 20,
-              child: FavAndBookButtons(),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

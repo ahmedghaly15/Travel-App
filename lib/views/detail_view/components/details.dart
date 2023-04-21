@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/models/data_model.dart';
+import 'package:travel_app/views/detail_view/cubit/cubit.dart';
 
 import '../../../shared/colors.dart';
 import '../../../shared/components/custom_button.dart';
 import '../../../shared/components/description_text.dart';
 import '../../../shared/components/title_text.dart';
 
-class Details extends StatefulWidget {
-  const Details({super.key});
-
-  @override
-  State<Details> createState() => _DetailsState();
-}
-
-class _DetailsState extends State<Details> {
-  int gottenStars = 4;
-  int selectedIndex = -1;
+class Details extends StatelessWidget {
+  final DataModel details;
+  final DetailViewCubit cubit;
+  const Details({
+    super.key,
+    required this.details,
+    required this.cubit,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,25 +39,25 @@ class _DetailsState extends State<Details> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               TitleText(
-                text: "Yosemite",
+                text: details.name!,
                 color: Colors.black.withOpacity(0.8),
               ),
-              const TitleText(
-                text: "\$ 250",
+              TitleText(
+                text: "\$ ${details.price}",
                 color: AppColors.mainColor,
               ),
             ],
           ),
           const SizedBox(height: 10),
           Row(
-            children: const <Widget>[
-              Icon(
+            children: <Widget>[
+              const Icon(
                 Icons.location_on,
                 color: AppColors.mainColor,
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               DescriptionText(
-                text: "USA, California",
+                text: details.location!,
                 color: AppColors.textColor1,
               ),
             ],
@@ -66,18 +66,21 @@ class _DetailsState extends State<Details> {
           Row(
             children: <Widget>[
               Wrap(
-                children: List.generate(5, (index) {
-                  return Icon(
-                    Icons.star,
-                    color: index < gottenStars
-                        ? AppColors.starColor
-                        : AppColors.textColor2,
-                  );
-                }),
+                children: List.generate(
+                  details.stars!,
+                  (index) {
+                    return Icon(
+                      Icons.star,
+                      color: index < details.stars!
+                          ? AppColors.starColor
+                          : AppColors.textColor2,
+                    );
+                  },
+                ),
               ),
               const SizedBox(width: 10),
-              const DescriptionText(
-                text: "(4.0)",
+              DescriptionText(
+                text: "(${details.stars}.0)",
                 color: AppColors.textColor2,
               ),
             ],
@@ -96,27 +99,23 @@ class _DetailsState extends State<Details> {
           const SizedBox(height: 10),
           Wrap(
             children: List.generate(
-              5,
+              details.people!,
               (index) {
                 return Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: CustomButton(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                    },
-                    backgroundColor: selectedIndex == index
+                    onTap: () => cubit.changeNPeopleSelected(index),
+                    backgroundColor: cubit.nPeopleSelected == index
                         ? Colors.black.withOpacity(0.8)
                         : AppColors.buttonBackground,
                     size: 50,
-                    borderColor: selectedIndex == index
+                    borderColor: cubit.nPeopleSelected == index
                         ? Colors.black.withOpacity(0.8)
                         : AppColors.buttonBackground,
                     child: Text(
                       (index + 1).toString(),
                       style: TextStyle(
-                        color: selectedIndex == index
+                        color: cubit.nPeopleSelected == index
                             ? Colors.white
                             : Colors.black,
                         fontWeight: FontWeight.bold,
@@ -134,9 +133,8 @@ class _DetailsState extends State<Details> {
             color: Colors.black.withOpacity(0.8),
           ),
           const SizedBox(height: 10),
-          const DescriptionText(
-            text:
-                "You must go for a travel. Travelling helps get rid of pressure. Got to mountains to see the nature",
+          DescriptionText(
+            text: details.description!,
             color: AppColors.mainTextColor,
           ),
         ],

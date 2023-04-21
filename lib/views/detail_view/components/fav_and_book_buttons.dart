@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/colors.dart';
 import '../../../shared/components/custom_button.dart';
-import '../../welcome_view/components/responsive_custom_button.dart';
+import '../../../shared/components/responsive_custom_button.dart';
 
 class FavAndBookButtons extends StatelessWidget {
   const FavAndBookButtons({super.key});

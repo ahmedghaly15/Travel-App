@@ -12,3 +12,12 @@ void navigateAndFinish(context, {required Widget view}) {
 void navigateBack(context) {
   Navigator.pop(context);
 }
+
+void navigateTo({required BuildContext context, required Widget view}) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => view,
+    ),
+  );
+}
