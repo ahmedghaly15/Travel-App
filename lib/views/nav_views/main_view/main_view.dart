@@ -25,36 +25,39 @@ class _MainViewState extends State<MainView> with TickerProviderStateMixin {
     return BlocBuilder<TravelAppCubit, TravelAppStates>(
       builder: (context, state) {
         List<DataModel> info = TravelAppCubit.getObject(context).places;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(
-                top: 75,
-                left: 20,
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 75,
+                  left: 20,
+                ),
+                child: const TitleText(text: "Discover"),
               ),
-              child: const TitleText(text: "Discover"),
-            ),
-            const SizedBox(height: 30),
-            TabBarTabs(tabController: tabController),
-            TabsContent(tabController: tabController, info: info),
-            const SizedBox(height: 30),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  TitleText(text: "Explore more", size: 22),
-                  DescriptionText(
-                    text: "See all",
-                    color: AppColors.textColor1,
-                  ),
-                ],
+              const SizedBox(height: 30),
+              TabBarTabs(tabController: tabController),
+              TabsContent(tabController: tabController, info: info),
+              const SizedBox(height: 30),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const <Widget>[
+                    TitleText(text: "Explore more", size: 22),
+                    DescriptionText(
+                      text: "See all",
+                      color: AppColors.textColor1,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 15),
-            const ExploreMoreListView(),
-          ],
+              const SizedBox(height: 15),
+              const ExploreMoreListView(),
+              const SizedBox(height: 15),
+            ],
+          ),
         );
       },
     );

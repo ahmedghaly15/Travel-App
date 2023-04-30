@@ -23,20 +23,25 @@ class PlacesTabContent extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             navigateTo(
-                context: context,
-                view: DetailView(
-                    details: TravelAppCubit.getObject(context).places[index]));
+              context: context,
+              view: DetailView(
+                details: TravelAppCubit.getObject(context).places[index],
+              ),
+            );
           },
-          child: Container(
-            margin: const EdgeInsets.only(top: 15, right: 8),
-            height: 300,
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  "http://mark.bslmeiyu.com/uploads/${info[index].img}",
+          child: Hero(
+            tag: info[index].name!,
+            child: Container(
+              margin: const EdgeInsets.only(top: 15, right: 8),
+              height: 300,
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    "http://mark.bslmeiyu.com/uploads/${info[index].img}",
+                  ),
                 ),
               ),
             ),

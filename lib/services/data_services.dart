@@ -18,7 +18,7 @@ class DataServices {
         return <DataModel>[];
       }
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
 
       return <DataModel>[];
     }

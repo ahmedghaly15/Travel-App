@@ -25,14 +25,17 @@ class DetailView extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Positioned(
-                  child: Container(
-                    height: 350,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          "http://mark.bslmeiyu.com/uploads/${details.img}",
+                  child: Hero(
+                    tag: details.name!,
+                    child: Container(
+                      height: 350,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            "http://mark.bslmeiyu.com/uploads/${details.img}",
+                          ),
                         ),
                       ),
                     ),

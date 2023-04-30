@@ -58,7 +58,7 @@ class TravelAppCubit extends Cubit<TravelAppStates> {
       places = value;
       emit(GetDataSuccesState());
     }).catchError((error) {
-      print(error.toString());
+      // print(error.toString());
       emit(GetDataErrorState(error: error.toString()));
     });
   }
