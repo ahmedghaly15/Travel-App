@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../layout/cubit/cubit.dart';
@@ -37,12 +38,10 @@ class PlacesTabContent extends StatelessWidget {
               width: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    "http://mark.bslmeiyu.com/uploads/${info[index].img}",
-                  ),
-                ),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: "http://mark.bslmeiyu.com/uploads/${info[index].img}",
+                fit: BoxFit.cover,
               ),
             ),
           ),

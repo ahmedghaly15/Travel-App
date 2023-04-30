@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_app/models/data_model.dart';
@@ -27,16 +28,13 @@ class DetailView extends StatelessWidget {
                 Positioned(
                   child: Hero(
                     tag: details.name!,
-                    child: Container(
+                    child: SizedBox(
                       height: 350,
                       width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
+                      child: CachedNetworkImage(
+                        imageUrl:
                             "http://mark.bslmeiyu.com/uploads/${details.img}",
-                          ),
-                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
