@@ -1,4 +1,4 @@
-# Travel-App
+# Travel-App-UI
 
 A new Flutter application.
 
