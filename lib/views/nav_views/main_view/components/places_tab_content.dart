@@ -36,12 +36,13 @@ class PlacesTabContent extends StatelessWidget {
               margin: const EdgeInsets.only(top: 15, right: 8),
               height: 300,
               width: 200,
-              decoration: BoxDecoration(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: "http://mark.bslmeiyu.com/uploads/${info[index].img}",
-                fit: BoxFit.cover,
+                child: CachedNetworkImage(
+                  imageUrl:
+                      "http://mark.bslmeiyu.com/uploads/${info[index].img}",
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
